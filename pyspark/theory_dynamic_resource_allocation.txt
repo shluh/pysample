@@ -1,0 +1,9 @@
+spark.dynamicAllocation.enabled = true
+spark.dynamicAllocation.shuffleTracking.enabled = true
+
+spark.dynamicAllocation.executorIdleTimeout = 60s (controls the release time for an idle executor)
+spark.dynamicAllocation.schedulerBacklogTimeout = 1s (controls the request time for more executors. if having pending tasks for more than 1s and do not have any free executor, the application will ask more executors)
+
+
+the resource manager has nothing to do with it
+it is the spark application that will request and release resources when needed

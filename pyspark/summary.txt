@@ -1,0 +1,73 @@
+Spark is a set of Jobs, broken down into stages, ans each stage is executed in parallel tasks.
+
+the AM (application master) container and the executor containers will run on the worker nodes.
+
+## Languages
+# Java or Scala arch
+JVM driver -> 1 or N JVM executors
+
+# Python arch
+PySpark driver -> Py4J -> JVM driver -> 1 or N JVM executors
+* You may have Python workers inside the executor container for
+running custom python code outside the PySpark API
+
+## MODE
+Cluster mode 
+- No dependency on client machine
+- Performance (no network latency problems cause they r all on the same subnet)
+
+Client mode used by 
+- spark-shell pyspark spark-sql
+- notebooks
+
+## CODE EXPLAINED
+
+1 - Spark runs each code block (action) as one spark job, i.e., each
+    actions create a spark job. 
+    Two actions two blocks;
+    Each spark actions run as a spark job that contains all the 
+    transformations of its code block;
+2 - Spark driver will create a Logical Query Plan for each Spark Job
+    2.2 - each spark job represents a logical query plan
+3 - The driver will, then, break  this plan into stages 
+4 - the driver will look at the plan to find out  the wide  dependency
+    transformations
+5 - each stage can have one or more narrow transformations, and the last 
+    operation of the stage is a WIDE dependency transformation.
+    5.5 - the spark will break the logical plan at the end of every WIDE
+        dependency and create two or more stages.
+        If we dont have any wode dependency, than the plan will be a single-stage plan
+6 - spark doesnt run these stages in parallel, it should finsih one, in order
+    to start the next. cause the output of one is the input of the other;
+7 - shuffle/sort operations
+8 - each partitions creates a task (curse example), thats can run in parallel
+9 - at the end the logical query plan of a job it is converted to a 
+    run time execution;
+
+Slot capacity is the same qty as CPU cores. 4 CPU cores, 4 executos slots; 4 parallel threads
+
+
+## Spark memory configurations
+JVM heap
+ 1. spark.executor.memoryOverhead
+ 2. spark.executor.memory (JVM memory)
+ 3. spark.memory.fraction (dataframe operations); defaultl 60%
+    expresses the size of M as a fraction of the (JVM heap space - 300MiB) (default 0.6)
+    used to reserve the % of memory execution and storage pool combined
+ 4. spark.memory.storageFraction (hard boundary that memory manager cannot evict). se nao tiver operacoes de chach isso pode ser diminuido
+ 5. spark.executor.cores (numero maximo de threads concorrentes)
+    - mais do que 5 cores causa gerenciamento excessivo de memoria
+    - e contenção de memória
+
+
+Offheap
+Ajuda evitar Garbage Collector delays
+
+6. spark.memory.offHeap.enabled
+7. spark.memory.offHeap.size
+8. spark.executor.pyspark.memory
+
+
+
+
+

@@ -1,0 +1,43 @@
+Spark AQE
+
+# dynamically coalescing shuffle partitions
+    shuffle operations is critical for spark Performance
+    one fundamental tuning property of shuffle operation is the number of output parttitions
+        you can tune it using spark.shuffle.partitions
+            small number of partitions cause    
+                large partition size
+                tasks needs large amount of memory
+                may cause OOM exception
+            
+            large number of partitions cause
+                small/tiny partitions size
+                many network fetch causing inefficiente network I/O
+                more burden for spark task scheduler
+    the solution is enable AQE, that:
+        determine and set teh best shuffle partitions number
+        combine or coalesce the small partitions
+    
+
+# dynamically switching join strategies
+    spark.sql.adaptive.localShuffleReader.enabled = true
+    
+    the custom shuffle reader is specially designed to further optimize the AQE broadcast join by reducing the network traffic.
+    shuffle will be still there, cause the statics are calculated during the shuffle
+    broadcast hash join will save the expensive sort operation
+    
+    requirements
+        you can apply broadcast join if one side of the join can fit well in memory
+        one table should be shorter than spark.sql.autoBroadcastJoinThreshold 
+
+    benefits
+        AQE computes the table size at shuffle time
+        replans the join strategy at runtime converting sort-merge join to a broadcast hash join
+    
+# dynamically optimizing skew joins
+    will split the skewd partition, and duplicate the data on right join table
+        spark.sql.adaptive.enable = true
+        spark.sql.adaptive.skewJoin.enable = true
+
+        Spark will start the optimization ONLY of the two conditions below are met
+        spark.sql.adaptive.skewJoin.skewedPartitionFactor = 5 (skewed partition is 5 time greater than the median partition size )
+        spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes = 256MB (partition it is considered skewd if the partition size is larger than XXX MB)

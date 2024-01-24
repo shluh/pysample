@@ -1,0 +1,6 @@
+Sets and Multisets in Python: Summary
+Sets are another useful and commonly used data structure included with Python and its standard library. Here are a few guidelines for deciding which one to use:
+
+If you need a mutable set, then use the built-in set type.
+If you need hashable objects that can be used as dictionary or set keys, then use a frozenset.
+If you need a multiset, or bag, data structure, then use collections.Counter.

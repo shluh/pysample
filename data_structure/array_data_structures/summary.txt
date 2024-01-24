@@ -1,0 +1,29 @@
+Because arrays store information in adjoining blocks of memory, they’re considered contiguous data structures (as opposed to linked data structures like linked lists, for example).
+Performance-wise, it’s very fast to look up an element contained in an array given the element’s index. A proper array implementation guarantees a constant O(1) access time for this case.
+
+There are a number of built-in data structures you can choose from when it comes to implementing arrays in Python. 
+In this section, you’ve focused on core language features and data structures included in the standard library.
+
+- If you’re willing to go beyond the Python standard library, then third-party packages like NumPy and pandas offer a wide range of fast array implementations for scientific computing and data science.
+- If you want to restrict yourself to the array data structures included with Python, then here are a few guidelines:
+- If you need to store arbitrary objects, potentially with mixed data types, then use a list or a tuple, depending on whether or not you want an immutable data structure.
+- If you have numeric (integer or floating-point) data and tight packing and performance is important, then try out array.array.
+- If you have textual data represented as Unicode characters, then use Python’s built-in str. If you need a mutable string-like data structure, then use a list of characters.
+- If you want to store a contiguous block of bytes, then use the immutable bytes type or a bytearray if you need a mutable data structure.
+
+In most cases, I like to start out with a simple list. I’ll only specialize later on if performance or storage space becomes an issue. Most of the time, using a general-purpose array data structure like list gives you the fastest development speed and the most programming convenience.
+I’ve found that this is usually much more important in the beginning than trying to squeeze out every last drop of performance right from the start.
+
+
+NOT IMPLEMENTED TYPES
+
+array.array: Basic Typed Arrays
+str: Immutable Arrays of Unicode Characters
+bytes: Immutable Arrays of Single Bytes
+bytearray: Mutable Arrays of Single Bytes
+
+
+
+
+
+

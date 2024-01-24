@@ -1,0 +1,8 @@
+Solve slow tasks caused by worker hardware issues.
+the feature will run same code in a differente node, e checks if it runs faster
+the feature will then, kill the slowest one.
+
+
+The feature does not help:
+    In data skew
+    In memory crisis

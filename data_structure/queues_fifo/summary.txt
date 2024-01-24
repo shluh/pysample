@@ -1,0 +1,33 @@
+https://realpython.com/python-data-structures/#queues-fifos
+
+-  a proper queue implementation is expected to take O(1) time for insert and delete operations.
+- 
+
+Queues (FIFOs)
+In this section, you’ll see how to implement a First-In/First-Out (FIFO) queue data structure using only built-in data types and classes from the Python standard library.
+
+A queue is a collection of objects that supports fast FIFO semantics for inserts and deletes. 
+The insert and delete operations are sometimes called enqueue and dequeue. 
+Unlike lists or arrays, queues typically don’t allow for random access to the objects they contain.
+
+Performance-wise, a proper queue implementation is expected to take O(1) time for insert and delete operations. 
+These are the two main operations performed on a queue, and in a correct implementation, they should be fast.
+
+Queues have a wide range of applications in algorithms and often help solve scheduling and parallel programming problems. 
+A short and beautiful algorithm using a queue is breadth-first search (BFS) on a tree or graph data structure.
+
+Scheduling algorithms often use priority queues internally. These are specialized queues. 
+Instead of retrieving the next element by insertion time, a priority queue retrieves the highest-priority element. 
+The priority of individual elements is decided by the queue based on the ordering applied to their keys.
+
+A regular queue, however, won’t reorder the items it carries. 
+Just like in the pipe example, you get out what you put in, and in exactly that order.
+Python ships with several queue implementations that each have slightly different characteristics. Let’s review them.
+
+
+# Queues in Python: Summary
+Python includes several queue implementations as part of the core language and its standard library.
+
+list objects can be used as queues, but this is generally not recommended due to slow performance.
+
+If you’re not looking for parallel processing support, then the implementation offered by collections.deque is an excellent default choice for implementing a FIFO queue data structure in Python. It provides the performance characteristics you’d expect from a good queue implementation and can also be used as a stack (LIFO queue).

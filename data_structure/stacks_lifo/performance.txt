@@ -1,0 +1,20 @@
+Performance-wise, a proper stack implementation is expected to take O(1) time for insert and delete operations.
+
+Stacks have a wide range of uses in algorithms. 
+For example, they’re used in language parsing as well as runtime memory management, which relies on a call stack. 
+A short and beautiful algorithm using a stack is depth-first search (DFS) on a tree or graph data structure.
+
+
+Stack Implementations in Python: Summary
+As you’ve seen, Python ships with several implementations for a stack data structure. All of them have slightly different characteristics as well as performance and usage trade-offs.
+
+If you’re not looking for parallel processing support (or if you don’t want to handle locking and unlocking manually), then your choice comes down to the built-in list type or collections.deque. 
+The difference lies in the data structure used behind the scenes and overall ease of use.
+
+list is backed by a dynamic array, which makes it great for fast random access but requires occasional resizing when elements are added or removed.
+
+The list over-allocates its backing storage so that not every push or pop requires resizing, and you get an amortized O(1) time complexity for these operations. But you do need to be careful to only insert and remove items using append() and pop(). Otherwise, performance slows down to O(n).
+
+collections.deque is backed by a doubly-linked list, which optimizes appends and deletes at both ends and provides consistent O(1) performance for these operations. Not only is its performance more stable, the deque class is also easier to use because you don’t have to worry about adding or removing items from the wrong end.
+
+In summary, collections.deque is an excellent choice for implementing a stack (LIFO queue) in Python.

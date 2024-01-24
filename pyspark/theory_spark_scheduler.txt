@@ -1,0 +1,9 @@
+Spark Job Scheduler
+    WHITIN APPLICATION
+        FIFO
+            Fist job gets higher priority
+            Consume as much as needed 
+            Next job gets leftovers resources
+        FAIR
+            Spark.Scheduler.Mode = FAIR
+            round robin slot allocation ( assing one task in a slot from the first job, then assing on task in a slot to from the second one, and so on)

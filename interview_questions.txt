@@ -1,0 +1,19 @@
+How many executor will you assign for a 10GB (10240 MB) file in HDFS
+---------------> default partition split size = 128 MB
+
+1. find the number of partitions = 10240 MB /128 MB = 80 partitions
+2. find the cpu cores for maximum parallelism =  80 CPU cores (we have 80 partitiond and need 80 cores for maximum  parallelism)
+3. find the maximum allowed cpu cores for each executor = 5 Cores per executor for YARN (we r using HDFS so, we must use YARN resource management. for yarn cluster, the recomended max CPU cores are five)
+4. number of executors = total cores/executor cores = 80(total cores)/5(executor cores) = 16  
+
+Follow-up Question
+How many cores are needed for each executor
+5 cores per executor
+
+What amount of memory is required for each executor?
+---------------> default partition split size = 128 MB
+1. Find the partition size = 128 MB
+2. Assign a minimum of 4x memory for each core = 128 MB x 4 = 512 MB
+3. Multiply it by executor cores to get executor memory = 512MB x 5 cores = 2560MB (minimum recomended memory by executor)
+    arrendondando da 3GB
+
