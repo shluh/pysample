@@ -81,7 +81,7 @@ parse_squash_commits = false
 ignore_merge_commits = false
 
 [tool.semantic_release.remote]
-type = ".github"
+type = "github"
 ignore_token_for_push = false
 insecure = false
 
