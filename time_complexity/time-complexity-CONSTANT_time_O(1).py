@@ -6,7 +6,7 @@ import time
 def constant_time_O_Um(data):
     # Constant Time — O(1)
     ''''
-    An algorithm is said to have a constant time when it is not dependent on the input data (n). 
+    An  algorithm is said to have a constant time when it is not dependent on the input data (n).
     No matter the size of the input data, the running time will always be the same.
     '''
     start = time.time()
